@@ -55,14 +55,10 @@ jobs:
         with:
           repository: hmasdev/${{ inputs.keyboard }}
           ref: ${{ inputs.keyborad-tag }}
-        permissions:
-          contents: read
       - name: Setup this repository
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.git-ref }}
-        permissions:
-          contents: read
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -105,3 +101,5 @@ jobs:
         with:
           name: hmproto34s-${{ inputs.keymap }}
           path: ~/artifacts
+    permissions:
+      contents: read
