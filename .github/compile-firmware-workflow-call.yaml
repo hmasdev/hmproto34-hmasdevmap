@@ -1,0 +1,107 @@
+name: Compile Firmware
+
+on:
+  workflow_dispatch:
+    inputs:
+      git-ref:
+        required: false
+        type: string
+        default: "main"
+        description: "Git ref to checkout. Default is main."
+      keymap:
+        type: string
+        required: false
+        default: "default"
+        description: "Keymap name. Default is hmasdevmap."
+      keyboard:
+        required: false
+        type: string
+        default: "hmproto34s"
+        description: "Keyboard name. Default is hmproto34s."
+      keyborad-tag:
+        required: false
+        type: string
+        default: "main"
+        description: "Keyboard branch or tag, like . Default is main."
+  workflow_call:
+    inputs:
+      git-ref:
+        required: false
+        type: string
+        default: "main"
+        description: "Git ref to checkout. Default is main."
+      keymap:
+        type: string
+        required: false
+        default: "default"
+        description: "Keymap name. Default is hmasdevmap."
+      keyboard:
+        required: false
+        type: string
+        default: "hmproto34s"
+        description: "Keyboard name. Default is hmproto34s."
+      keyborad-tag:
+        required: false
+        type: string
+        default: "main"
+        description: "Keyboard branch or tag, like . Default is main."
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup keyborad firmware repository
+        uses: actions/checkout@v4
+        with:
+          repository: hmasdev/${{ inputs.keyboard }}
+          ref: ${{ inputs.keyborad-tag }}
+        permissions:
+          contents: read
+      - name: Setup this repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.git-ref }}
+        permissions:
+          contents: read
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install QMK
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --user qmk
+      - name: Setup QMK
+        run: |
+          qmk setup -H ~/qmk_firmware -y
+      - name: Setup Vial QMK
+        run: |
+          git clone https://github.com/vial-kb/vial-qmk.git ~/vial-qmk
+          cd ~/vial-qmk
+          python -m pip install -r requirements.txt
+          make git-submodule
+          qmk doctor || echo 'qmk doctor failed'
+      - name: Copy my keyboards into qmk_firmsware
+        run: |
+          mkdir -p ~/vial-qmk/keyboards/hmproto34s
+          cp -r ./* ~/vial-qmk/keyboards/hmproto34s || echo 'failed to copy'
+      - name: Compile
+        run: |
+          cd ~/vial-qmk
+          make ${KEYBOARD_NAME}:${KEYMAP_NAME}
+        env:
+          KEYBOARD_NAME: "hmproto34s"
+          KEYMAP_NAME: ${{ inputs.keymap }}
+      - name: Create Artifacts Directory
+        run: |
+          mkdir -p ~/artifacts
+          cp ~/vial-qmk/${KEYBOARD_NAME}_${KEYMAP_NAME}.hex ~/artifacts/
+          cp ./LICENSE ~/artifacts/
+        env:
+          KEYBOARD_NAME: "hmproto34s"
+          KEYMAP_NAME: ${{ inputs.keymap }}
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: hmproto34s-${{ inputs.keymap }}
+          path: ~/artifacts
