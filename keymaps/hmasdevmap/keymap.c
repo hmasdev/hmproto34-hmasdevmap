@@ -318,9 +318,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     // Symbol and Number
     [KL_SYMNUM] = LAYOUT(
-        LCTL(KC_MINS),       RCS(KC_SCLN),        RCS(KC_ESC),         LSG(KC_LEFT),        LSG(KC_RGHT),        LSFT(KC_MINS),       KC_7,                KC_8,                KC_9,                LSFT(KC_QUOT),
-        LSFT(KC_1),          LSFT(KC_SLSH),       LSFT(KC_EQL),        LSFT(KC_6),          LSFT(KC_INT3),       KC_DOT,              KC_4,                KC_5,                KC_6,                KC_SLSH,
-        LSFT(KC_LBRC),       CKC_L_ARROW,         CKC_R_ARROW,         LSFT(KC_5),          LSFT(KC_4),          KC_0,                KC_1,                KC_2,                KC_3,                LSFT(KC_SCLN),
-        LSFT(KC_3),          XXXXXXX,             XXXXXXX,             XXXXXXX,             TD(TD_3_QUOTE),      KC_ENT,              XXXXXXX,             XXXXXXX,             XXXXXXX,             KC_MINS
+        LCTL(KC_MINS),       RCS(KC_SCLN),        RCS(KC_ESC),         LSG(KC_LEFT),        LSG(KC_RGHT),        LSFT(KC_MINS),       KC_7,                KC_8,                KC_9,                LSFT(KC_SCLN),
+        LSFT(KC_1),          LSFT(KC_SLSH),       LSFT(KC_EQL),        LSFT(KC_6),          LSFT(KC_INT3),       KC_DOT,              KC_4,                KC_5,                KC_6,                LSFT(KC_QUOT),
+        LSFT(KC_LBRC),       CKC_L_ARROW,         CKC_R_ARROW,         LSFT(KC_5),          LSFT(KC_4),          KC_0,                KC_1,                KC_2,                KC_3,                RCS_T(KC_SLSH),
+        LSFT(KC_3),          XXXXXXX,             XXXXXXX,             XXXXXXX,             TD(TD_3_QUOTE),      LCTL_T(KC_ENT),      XXXXXXX,             XXXXXXX,             XXXXXXX,             LCA_T(KC_MINS)
     )
 };
