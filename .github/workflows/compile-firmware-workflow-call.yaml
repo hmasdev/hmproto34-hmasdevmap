@@ -81,6 +81,8 @@ jobs:
         run: |
           mkdir -p ~/vial-qmk/keyboards/${KEYBOARD_NAME}
           cp -r ./* ~/vial-qmk/keyboards/${KEYBOARD_NAME} || echo 'failed to copy'
+          ls ~/vial-qmk/keyboards/${KEYBOARD_NAME}
+          ls ~/vial-qmk/keyboards/${KEYBOARD_NAME}/keymaps
         env:
           KEYBOARD_NAME: "${{ inputs.keyboard }}"
       - name: Compile
