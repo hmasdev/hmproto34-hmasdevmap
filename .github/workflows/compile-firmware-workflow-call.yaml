@@ -11,7 +11,7 @@ on:
       keymap:
         type: string
         required: false
-        default: "default"
+        default: "hmasdevmap"
         description: "Keymap name. Default is hmasdevmap."
       keyboard:
         required: false
@@ -33,7 +33,7 @@ on:
       keymap:
         type: string
         required: false
-        default: "default"
+        default: "hmasdevmap"
         description: "Keymap name. Default is hmasdevmap."
       keyboard:
         required: false
@@ -79,14 +79,16 @@ jobs:
           qmk doctor || echo 'qmk doctor failed'
       - name: Copy my keyboards into qmk_firmsware
         run: |
-          mkdir -p ~/vial-qmk/keyboards/hmproto34s
-          cp -r ./* ~/vial-qmk/keyboards/hmproto34s || echo 'failed to copy'
+          mkdir -p ~/vial-qmk/keyboards/${KEYBOARD_NAME}
+          cp -r ./* ~/vial-qmk/keyboards/${KEYBOARD_NAME} || echo 'failed to copy'
+        env:
+          KEYBOARD_NAME: "${{ inputs.keyboard }}"
       - name: Compile
         run: |
           cd ~/vial-qmk
           make ${KEYBOARD_NAME}:${KEYMAP_NAME}
         env:
-          KEYBOARD_NAME: "hmproto34s"
+          KEYBOARD_NAME: "${{ inputs.keyboard }}"
           KEYMAP_NAME: ${{ inputs.keymap }}
       - name: Create Artifacts Directory
         run: |
@@ -94,12 +96,12 @@ jobs:
           cp ~/vial-qmk/${KEYBOARD_NAME}_${KEYMAP_NAME}.hex ~/artifacts/
           cp ./LICENSE ~/artifacts/
         env:
-          KEYBOARD_NAME: "hmproto34s"
+          KEYBOARD_NAME: "${{ inputs.keyboard }}"
           KEYMAP_NAME: ${{ inputs.keymap }}
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: hmproto34s-${{ inputs.keymap }}
+          name: ${{ inputs.keyboard }}-${{ inputs.keymap }}
           path: ~/artifacts
     permissions:
       contents: read
