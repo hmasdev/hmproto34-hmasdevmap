@@ -6,8 +6,7 @@
 
 The simplest way to use this keymap is to flash the pre-built firmware.
 You can find the latest firmware in the [releases](https://github.com/hmasdev/hmproto34-hmasdevmap/releases) section of this repository.
-Download the firmware file and flash it to your keyboard using the appropriate method for your keyboard, like [Pro Micro Web Updater](https://sekigon-gonnoc.github.io/promicro-web-updater/index.html).
-
+Download the firmware file and flash it to your keyboard using an appropriate method for your keyboard. For example, you can use the [Pro Micro Web Updater](https://sekigon-gonnoc.github.io/promicro-web-updater/index.html). Alternatively, you may use other tools like QMK Toolbox or avrdude, depending on your preference and hardware compatibility.
 ### How to Build
 
 In this section, we will go through the steps to build the firmware from source.
