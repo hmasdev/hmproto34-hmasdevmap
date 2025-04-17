@@ -40,7 +40,7 @@ on:
         type: string
         default: "hmproto34s"
         description: "Keyboard name. Default is hmproto34s."
-      keyborad-tag:
+      keyboard-tag:
         required: false
         type: string
         default: "main"
@@ -54,7 +54,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: hmasdev/${{ inputs.keyboard }}
-          ref: ${{ inputs.keyborad-tag }}
+          ref: ${{ inputs.keyboard-tag }}
           path: ${{ inputs.keyboard }}_firmware
       - name: Setup this repository
         uses: actions/checkout@v4
