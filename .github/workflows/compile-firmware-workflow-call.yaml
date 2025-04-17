@@ -18,7 +18,7 @@ on:
         type: string
         default: "hmproto34s"
         description: "Keyboard name. Default is hmproto34s."
-      keyborad-tag:
+      keyboard-tag:
         required: false
         type: string
         default: "main"
