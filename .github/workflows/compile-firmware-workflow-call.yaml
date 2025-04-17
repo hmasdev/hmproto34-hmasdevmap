@@ -55,10 +55,12 @@ jobs:
         with:
           repository: hmasdev/${{ inputs.keyboard }}
           ref: ${{ inputs.keyborad-tag }}
+          path: ${{ inputs.keyboard }}_firmware
       - name: Setup this repository
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.git-ref }}
+          path: ${{ inputs.keyboard }}_keymap
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -80,9 +82,8 @@ jobs:
       - name: Copy my keyboards into qmk_firmsware
         run: |
           mkdir -p ~/vial-qmk/keyboards/${KEYBOARD_NAME}
-          cp -r ./* ~/vial-qmk/keyboards/${KEYBOARD_NAME} || echo 'failed to copy'
-          ls ~/vial-qmk/keyboards/${KEYBOARD_NAME}
-          ls ~/vial-qmk/keyboards/${KEYBOARD_NAME}/keymaps
+          cp -r ${KEYBOARD_NAME}_firmware/* ~/vial-qmk/keyboards/${KEYBOARD_NAME}/ || echo 'failed to copy'
+          cp -r ${KEYBOARD_NAME}_keymap/* ~/vial-qmk/keyboards/${KEYBOARD_NAME}/ || echo 'failed to copy'
         env:
           KEYBOARD_NAME: "${{ inputs.keyboard }}"
       - name: Compile
