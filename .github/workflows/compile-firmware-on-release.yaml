@@ -1,0 +1,80 @@
+name: On Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  list-keymaps:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.list-keymaps.outputs.matrix }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: List Keymaps
+        id: list-keymaps
+        run: |
+          python -c "import os,json; print('matrix='+json.dumps({'include': [{'keymap': d} for d in os.listdir('keymaps') if os.path.isdir(os.path.join('keymaps', d))]}))" >> $GITHUB_OUTPUT
+    permissions:
+      contents: read
+  compile-hmproto34s:
+    needs: list-keymaps
+    strategy:
+      matrix: ${{fromJson(needs.list-keymaps.outputs.matrix)}}
+    uses: ./.github/workflows/compile-firmware-workflow-call.yaml
+    with:
+      git-ref: ${{ github.ref }}
+      keymap: ${{ matrix.keymap }}
+      keyboard: hmproto34s
+      keyboard-tag: "main"
+    permissions:
+      contents: read
+  compile-hmproto34:
+    needs: list-keymaps
+    strategy:
+      matrix: ${{fromJson(needs.list-keymaps.outputs.matrix)}}
+    uses: ./.github/workflows/compile-firmware-workflow-call.yaml
+    with:
+      git-ref: ${{ github.ref }}
+      keymap: ${{ matrix.keymap }}
+      keyboard: hmproto34
+      keyboard-tag: "main"
+    permissions:
+      contents: read
+  deploy-to-github:
+    needs: [compile-hmproto34s, compile-hmproto34]
+    if: github.event.release.prerelease == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download hmproto34s firmware artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: hmproto34s-hmasdevmap
+          path: ./hmproto34s/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download hmproto34 firmware artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: hmproto34-hmasdevmap
+          path: ./hmproto34/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload .hex to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ./hmproto34s/*.hex
+            ./hmproto34/*.hex
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RELEASE_ID: ${{ github.event.release.id }}
+    permissions:
+      contents: write
+      packages: read
