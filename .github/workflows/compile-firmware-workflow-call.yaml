@@ -79,7 +79,7 @@ jobs:
           python -m pip install -r requirements.txt
           make git-submodule
           qmk doctor || echo 'qmk doctor failed'
-      - name: Copy my keyboards into qmk_firmsware
+      - name: Copy my keyboards into qmk_firmware
         run: |
           mkdir -p ~/vial-qmk/keyboards/${KEYBOARD_NAME}
           cp -r ./${KEYBOARD_NAME}_firmware/* ~/vial-qmk/keyboards/${KEYBOARD_NAME}/ || echo 'failed to copy'
