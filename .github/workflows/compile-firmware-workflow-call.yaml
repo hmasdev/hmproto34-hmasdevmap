@@ -50,7 +50,7 @@ jobs:
   compile:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup keyborad firmware repository
+      - name: Setup keyboard firmware repository
         uses: actions/checkout@v4
         with:
           repository: hmasdev/${{ inputs.keyboard }}
