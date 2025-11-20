@@ -21,6 +21,7 @@ enum custom_keycodes {
     CKC_EXIT,
     CKC_FU,
     CKC_HA,
+    CKC_MAKE,
     CKC_NN,
     CKC_NU,
     CKC_NYU,
@@ -37,6 +38,7 @@ enum custom_keycodes {
     CKC_L_ARROW,
     CKC_R_ARROW,
     /* PYTHON */
+    CKC_UV_RUN,
     CKC_PYTHON,
     CKC_PYTHONM,
     CKC_PIP_INSTALL,
@@ -61,6 +63,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CKC_EXIT: if (record->event.pressed) { SEND_STRING("exit"); } return false; break;
         case CKC_FU: if (record->event.pressed) { SEND_STRING("fu"); } return false; break;
         case CKC_HA: if (record->event.pressed) { SEND_STRING("ha"); } return false; break;
+        case CKC_MAKE: if (record->event.pressed) { SEND_STRING("make"); } return false; break;
         case CKC_NN: if (record->event.pressed) { SEND_STRING("nn"); } return false; break;
         case CKC_NU: if (record->event.pressed) { SEND_STRING("nu"); } return false; break;
         case CKC_NYU: if (record->event.pressed) { SEND_STRING("nyu"); } return false; break;
@@ -77,6 +80,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CKC_L_ARROW: if (record->event.pressed) { SEND_STRING("<- "); } return false; break;
         case CKC_R_ARROW: if (record->event.pressed) { SEND_STRING("-> "); } return false; break;
         // PYTHON
+        case CKC_UV_RUN: if (record->event.pressed) { SEND_STRING("uv run "); } return false; break;
         case CKC_PYTHON: if (record->event.pressed) { SEND_STRING("python "); } return false; break;
         case CKC_PYTHONM: if (record->event.pressed) { SEND_STRING("python -m "); } return false; break;
         case CKC_PIP_INSTALL: if (record->event.pressed) { SEND_STRING("pip install "); } return false; break;
@@ -241,9 +245,9 @@ const uint16_t PROGMEM KC_TD_QUOTE_CKC_NN[] = {TD(TD_QUOTE), CKC_NN, COMBO_END};
 
 combo_t key_combos[] = {
     // python
-    COMBO(KC_F2_F3, CKC_PYTHON),
-    COMBO(KC_F2_F3_F4, CKC_PYTHONM),
-    COMBO(KC_F1_F2_F3, CKC_PYTEST),
+    COMBO(KC_F2_F3, CKC_UV_RUN),
+    COMBO(KC_F2_F3_F4, CKC_PYTHON),
+    COMBO(KC_F1_F2_F3, CKC_PYTHONM),
     COMBO(KC_F1_F2_F3_F4, CKC_PIP_INSTALL),
     COMBO(KC_F3_F4, CKC_PY_NOQA),
     COMBO(KC_F4_F5, CKC_PY_TYPE_IGNORE),
@@ -341,7 +345,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [KL_OPE] = LAYOUT(
         CKC_EXIT,            CKC_WA,              KC_MS_UP,            CKC_FU,              CKC_BE,              CKC_WO,              CKC_NU,              KC_UP,               CKC_RO,              LGUI_T(KC_LBRC),
         CKC_ZA,              KC_MS_LEFT,          KC_MS_DOWN,          KC_MS_RIGHT,         KC_BTN1,             KC_HOME,             KC_LEFT,             KC_DOWN,             KC_RIGHT,            KC_END,
-        LSFT_T(KC_APP),      KC_WH_U,             KC_WH_D,             KC_BTN3,             KC_BTN2,             TD(TD_BRACKET_L),    TD(TD_BRACKET_R),    TD(TD_QUOTE),        CKC_NN,              LCTL_T(KC_INT1),
+        LSFT_T(KC_APP),      KC_WH_U,             KC_WH_D,             KC_BTN3,             KC_BTN2,             TD(TD_BRACKET_L),    TD(TD_BRACKET_R),    TD(TD_QUOTE),        CKC_MAKE,            LCTL_T(KC_INT1),
         LT(KL_SYMNUM, KC_TAB),XXXXXXX,            XXXXXXX,             XXXXXXX,             _______,             LSFT_T(KC_ENT),      XXXXXXX,             XXXXXXX,             XXXXXXX,             LALT_T(KC_QUOT)
     ),
 
