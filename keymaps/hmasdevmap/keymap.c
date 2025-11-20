@@ -47,6 +47,9 @@ enum custom_keycodes {
     CKC_PY_NOQA,
     CKC_PY_TYPE_IGNORE,
     CKC_PY_TYPE_IGNORE_NOQA,
+    /* VSCode */
+    CKC_CTL_K_SFT_ENT,
+    CKC_CTL_K_CTL_ALT_S,
     /* SAFE RANGE */
     HM_SAFE_RANGE,
 };
@@ -84,6 +87,40 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CKC_PY_NOQA: if (record->event.pressed) { SEND_STRING("  # noqa"); } return false; break;
         case CKC_PY_TYPE_IGNORE: if (record->event.pressed) { SEND_STRING("  # type' ignore"); } return false; break;
         case CKC_PY_TYPE_IGNORE_NOQA: if (record->event.pressed) { SEND_STRING("  # type' ignore # noqa"); } return false; break;
+        // VSCode
+        case CKC_CTL_K_SFT_ENT:
+            // View: Pin Editor
+            // View: Unpin Editor
+            if (record->event.pressed) {
+                // send Ctrl+K
+                register_code(KC_LCTL);
+                register_code(KC_K);
+                unregister_code(KC_K);
+                unregister_code(KC_LCTL);
+                // send Shift+Enter
+                register_code(KC_LSFT);
+                register_code(KC_ENTER);
+                unregister_code(KC_ENTER);
+                unregister_code(KC_LSFT);
+            }
+            return false;
+            break;
+        case CKC_CTL_K_CTL_ALT_S:
+            // Git: Stage Selected Ranges
+            if (record->event.pressed) {
+                // send Ctrl+K
+                register_code(KC_LCTL);
+                register_code(KC_K);
+                unregister_code(KC_K);
+                // send Ctrl+Alt+S
+                register_code(KC_LALT);
+                register_code(KC_S);
+                unregister_code(KC_S);
+                unregister_code(KC_LALT);
+                unregister_code(KC_LCTL);
+            }
+            return false;
+            break;
         default: return true; break;
     };
     return true;
@@ -310,9 +347,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     // Fun
     [KL_FUN] = LAYOUT(
-        LCTL(KC_0),          LCTL(KC_1),          LCTL(KC_2),          LCTL(KC_PGUP),       LCTL(KC_PGDN),       CKC_NYU,             CKC_RYA,             CKC_RYU,             CKC_RYO,             LGUI_T(KC_F10),
-        KC_F1,               KC_F2,               KC_F3,               KC_F4,               KC_F5,               KC_F6,               KC_F7,               KC_F8,               KC_F9,               KC_F11,
-        RCS(KC_E),           LCAG(KC_N),          LCA(KC_I),           RCS(KC_EQL),         LCTL(KC_LBRC),       LCA(KC_LEFT),        LCA(KC_RGHT),        LCA(KC_DOWN),        LCA(KC_UP),          LCTL_T(KC_F12),
+        LCTL(KC_0),          KC_PGUP,             KC_PGDN,             LCTL(KC_PGUP),       LCTL(KC_PGDN),       CKC_NYU,             CKC_RYA,             CKC_RYU,             CKC_RYO,             LGUI_T(KC_F10),
+        LCTL_T(KC_F1),       KC_F2,               KC_F3,               KC_F4,               KC_F5,               KC_F6,               KC_F7,               KC_F8,               KC_F9,               KC_F11,
+        CKC_CTL_K_CTL_ALT_S, LCAG(KC_N),          LCTL(KC_INT1),       CKC_CTL_K_SFT_ENT,   LCTL(KC_LBRC),       LCA(KC_LEFT),        LCA(KC_RGHT),        LCA(KC_DOWN),        LCA(KC_UP),          LCTL_T(KC_F12),
         LCTL(KC_SLSH),       XXXXXXX,             XXXXXXX,             XXXXXXX,             RCS(KC_P),           _______,             XXXXXXX,             XXXXXXX,             XXXXXXX,             MO(KL_SYMNUM)
     ),
 
