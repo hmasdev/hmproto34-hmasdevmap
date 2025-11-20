@@ -263,7 +263,7 @@ combo_t key_combos[] = {
     COMBO(KC_HJ, KC_Y),  // qwerty
     COMBO(KC_TG, KC_B),  // mod norman
     COMBO(KC_FG, KC_T),  // qwerty
-    COMBO(KC_HOME_LEFT, CKC_WO),
+    COMBO(KC_HOME_LEFT, CKC_NN),
 
     // for brackets and quotes
     // COMBO(KC_WE, LSFT(KC_RBRC)),  // qwerty {
@@ -300,7 +300,7 @@ combo_t key_combos[] = {
     COMBO(KC_ENT_L_BRACKET, KC_DEL),
     COMBO(KC_ENT_R_BRACKET, KC_ENT),
 
-    COMBO(KC_QW, KC_ESC),
+    COMBO(KC_QW, LGUI_T(KC_ESC)),
 
     // for numpad
     COMBO(KC_ENT_KC_0, KC_BSPC),
@@ -323,9 +323,9 @@ combo_t key_combos[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // QWERTY
     [KL_QWERTY] = LAYOUT(
-        LGUI_T(KC_Q),        KC_W,                KC_E,                KC_R,                KC_T,                KC_Y,                KC_U,                KC_I,                KC_O,                LGUI_T(KC_P),
+        LCTL_T(KC_Q),        KC_W,                KC_E,                KC_R,                KC_T,                KC_Y,                KC_U,                KC_I,                KC_O,                LGUI_T(KC_P),
         KC_A,                KC_S,                KC_D,                KC_F,                KC_G,                KC_H,                KC_J,                KC_K,                KC_L,                KC_SCLN,
-        LCTL_T(KC_Z),        KC_X,                KC_C,                KC_V,                KC_B,                KC_N,                KC_M,                KC_COMM,             KC_DOT,              LCTL_T(KC_SLSH),
+        KC_Z,                KC_X,                KC_C,                KC_V,                KC_B,                KC_N,                KC_M,                KC_COMM,             KC_DOT,              LCTL_T(KC_SLSH),
         LSFT_T(KC_TAB),      XXXXXXX,             XXXXXXX,             XXXXXXX,             LT(KL_OPE, KC_BSPC), LT(KL_FUN, KC_SPACE),XXXXXXX,             XXXXXXX,             XXXXXXX,             LALT_T(KC_GRV)
     ),
 
