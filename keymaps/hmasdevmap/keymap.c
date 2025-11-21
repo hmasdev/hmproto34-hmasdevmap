@@ -241,7 +241,7 @@ const uint16_t PROGMEM KC_F6_F7[] = {KC_F6, KC_F7, COMBO_END};
 const uint16_t PROGMEM KC_F7_F8[] = {KC_F7, KC_F8, COMBO_END};
 const uint16_t PROGMEM KC_F6_F7_F8[] = {KC_F6, KC_F7, KC_F8, COMBO_END};
 
-const uint16_t PROGMEM KC_TD_QUOTE_CKC_NN[] = {TD(TD_QUOTE), CKC_NN, COMBO_END};
+const uint16_t PROGMEM KC_TD_QUOTE_CKC_MAKE[] = {TD(TD_QUOTE), CKC_MAKE, COMBO_END};
 
 combo_t key_combos[] = {
     // python
@@ -319,7 +319,7 @@ combo_t key_combos[] = {
     COMBO(KC_QWDF, DF(KL_QWERTY)),     // mod norman
 
     // combo for mouse
-    COMBO(KC_TD_QUOTE_CKC_NN, KC_BTN1),
+    COMBO(KC_TD_QUOTE_CKC_MAKE, KC_BTN1),
 };
 /* combo end */
 
@@ -335,9 +335,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     // mod norman
     [KL_NORMAN] = LAYOUT(
-        LGUI_T(KC_Q),        KC_W,                KC_D,                KC_F,                KC_B,                KC_J,                KC_U,                KC_R,                KC_P,                LGUI_T(KC_SCLN),
+        LCTL_T(KC_Q),        KC_W,                KC_D,                KC_F,                KC_B,                KC_J,                KC_U,                KC_R,                KC_P,                LGUI_T(KC_SCLN),
         KC_A,                KC_S,                KC_E,                KC_T,                KC_G,                KC_Y,                KC_N,                KC_I,                KC_O,                KC_L,
-        LCTL_T(KC_Z),        KC_X,                KC_C,                KC_V,                KC_K,                KC_H,                KC_M,                KC_EQL,              KC_INT3,             LCTL_T(KC_SLSH),
+        KC_Z,                KC_X,                KC_C,                KC_V,                KC_K,                KC_H,                KC_M,                KC_EQL,              KC_INT3,             LCTL_T(KC_SLSH),
         LSFT_T(KC_TAB),      XXXXXXX,             XXXXXXX,             XXXXXXX,             LT(KL_OPE, KC_COMM), LT(KL_FUN, KC_SPACE),XXXXXXX,             XXXXXXX,             XXXXXXX,             LALT_T(KC_GRV)
     ),
 
@@ -353,7 +353,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [KL_FUN] = LAYOUT(
         LCTL(KC_0),          KC_PGUP,             KC_PGDN,             LCTL(KC_PGUP),       LCTL(KC_PGDN),       CKC_NYU,             CKC_RYA,             CKC_RYU,             CKC_RYO,             LGUI_T(KC_F10),
         LCTL_T(KC_F1),       KC_F2,               KC_F3,               KC_F4,               KC_F5,               KC_F6,               KC_F7,               KC_F8,               KC_F9,               KC_F11,
-        CKC_CTL_K_CTL_ALT_S, LCAG(KC_N),          LCTL(KC_INT1),       CKC_CTL_K_SFT_ENT,   LCTL(KC_LBRC),       LCA(KC_LEFT),        LCA(KC_RGHT),        LCA(KC_DOWN),        LCA(KC_UP),          LCTL_T(KC_F12),
+        CKC_CTL_K_CTL_ALT_S, LCAG(KC_N),          KC_APP,              CKC_CTL_K_SFT_ENT,   LCTL(KC_LBRC),       LCA(KC_LEFT),        LCA(KC_RGHT),        LCA(KC_DOWN),        LCA(KC_UP),          LCTL_T(KC_F12),
         LCTL(KC_SLSH),       XXXXXXX,             XXXXXXX,             XXXXXXX,             RCS(KC_P),           _______,             XXXXXXX,             XXXXXXX,             XXXXXXX,             MO(KL_SYMNUM)
     ),
 
