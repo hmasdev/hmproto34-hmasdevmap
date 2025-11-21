@@ -217,7 +217,7 @@ const uint16_t PROGMEM KC_SPACE_M[] = {LT(KL_FUN, KC_SPACE), KC_M, COMBO_END};
 
 const uint16_t PROGMEM KC_XC[] = {KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM KC_ZX[] = {KC_Z, KC_X, COMBO_END};
-const uint16_t PROGMEM KC_QW[] = {LGUI_T(KC_Q), KC_W, COMBO_END};
+const uint16_t PROGMEM KC_QW[] = {LCTL_T(KC_Q), KC_W, COMBO_END};
 const uint16_t PROGMEM KC_ENT_L_BRACKET[] = {LSFT_T(KC_ENT), TD(TD_BRACKET_L), COMBO_END};
 const uint16_t PROGMEM KC_ENT_R_BRACKET[] = {LSFT_T(KC_ENT), TD(TD_BRACKET_R), COMBO_END};
 
@@ -227,8 +227,8 @@ const uint16_t PROGMEM KC_GRV_SPACE[] = {LALT_T(KC_GRV), LT(KL_FUN, KC_SPACE), C
 const uint16_t PROGMEM KC_ENT_KC_0[] = {KC_ENT, KC_0, COMBO_END};
 const uint16_t PROGMEM KC_ENT_KC_1[] = {KC_ENT, KC_1, COMBO_END};
 
-const uint16_t PROGMEM KC_QWER[] = {LGUI_T(KC_Q), KC_W, KC_E, KC_R, COMBO_END};
-const uint16_t PROGMEM KC_QWDF[] = {LGUI_T(KC_Q), KC_W, KC_D, KC_F, COMBO_END};
+const uint16_t PROGMEM KC_QWER[] = {LCTL_T(KC_Q), KC_W, KC_E, KC_R, COMBO_END};
+const uint16_t PROGMEM KC_QWDF[] = {LCTL_T(KC_Q), KC_W, KC_D, KC_F, COMBO_END};
 
 const uint16_t PROGMEM KC_F2_F3[] = {KC_F2, KC_F3, COMBO_END};
 const uint16_t PROGMEM KC_F1_F2_F3[] = {KC_F1, KC_F2, KC_F3, COMBO_END};
