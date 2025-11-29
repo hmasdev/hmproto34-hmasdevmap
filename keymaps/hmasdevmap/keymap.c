@@ -39,7 +39,7 @@ enum custom_keycodes {
     CKC_PIP_INSTALL,
     CKC_PIP_INSTALL_R,
     CKC_PYTEST,
-    CKC_FLAKE8,
+    CKC_RUFF_CHECK,
     CKC_MYPY,
     CKC_PY_NOQA,
     CKC_PY_TYPE_IGNORE,
@@ -76,7 +76,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CKC_PIP_INSTALL: if (record->event.pressed) { SEND_STRING("pip install "); } return false; break;
         case CKC_PIP_INSTALL_R: if (record->event.pressed) { SEND_STRING("pip install -r requirements.txt"); } return false; break;
         case CKC_PYTEST: if (record->event.pressed) { SEND_STRING("pytest "); } return false; break;
-        case CKC_FLAKE8: if (record->event.pressed) { SEND_STRING("flake8 "); } return false; break;
+        case CKC_RUFF_CHECK: if (record->event.pressed) { SEND_STRING("ruff check "); } return false; break;
         case CKC_MYPY: if (record->event.pressed) { SEND_STRING("mypy "); } return false; break;
         case CKC_PY_NOQA: if (record->event.pressed) { SEND_STRING("  # noqa"); } return false; break;
         case CKC_PY_TYPE_IGNORE: if (record->event.pressed) { SEND_STRING("  # type' ignore"); } return false; break;
@@ -243,7 +243,7 @@ combo_t key_combos[] = {
     COMBO(KC_F4_F5, CKC_PY_TYPE_IGNORE),
     COMBO(KC_F3_F4_F5, CKC_PY_TYPE_IGNORE_NOQA),
     COMBO(KC_F6_F7, CKC_PYTEST),
-    COMBO(KC_F7_F8, CKC_FLAKE8),
+    COMBO(KC_F7_F8, CKC_RUFF_CHECK),
     COMBO(KC_F6_F7_F8, CKC_MYPY),
 
     // To enhance the typing experience
