@@ -231,7 +231,7 @@ const uint16_t PROGMEM KC_F6_F7[] = {KC_F6, KC_F7, COMBO_END};
 const uint16_t PROGMEM KC_F7_F8[] = {KC_F7, KC_F8, COMBO_END};
 const uint16_t PROGMEM KC_F6_F7_F8[] = {KC_F6, KC_F7, KC_F8, COMBO_END};
 
-const uint16_t PROGMEM KC_TD_QUOTE_KC_INT3[] = {TD(TD_QUOTE), KC_INT3, COMBO_END};
+const uint16_t PROGMEM KC_EQL_KC_INT3[] = {KC_EQL, KC_INT3, COMBO_END};
 
 combo_t key_combos[] = {
     // python
@@ -309,7 +309,7 @@ combo_t key_combos[] = {
     COMBO(KC_QWDF, DF(KL_QWERTY)),     // mod norman
 
     // combo for mouse
-    COMBO(KC_TD_QUOTE_KC_INT3, KC_BTN1),
+    COMBO(KC_EQL_KC_INT3, KC_BTN1),
 };
 /* combo end */
 
@@ -327,7 +327,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [KL_NORMAN] = LAYOUT(
         LGUI_T(KC_Q),        KC_W,                KC_D,                KC_F,                KC_B,                KC_J,                KC_U,                KC_R,                KC_P,                LGUI_T(KC_SCLN),
         KC_A,                KC_S,                KC_E,                KC_T,                KC_G,                KC_Y,                KC_N,                KC_I,                KC_O,                KC_L,
-        KC_Z,                KC_X,                KC_C,                KC_V,                KC_K,                KC_H,                KC_M,                KC_EQL,              CKC_NN,              LCTL_T(KC_SLSH),
+        KC_Z,                KC_X,                KC_C,                KC_V,                KC_K,                KC_H,                KC_M,                XXXXXXX,             CKC_NN,              LCTL_T(KC_SLSH),
         LSFT_T(KC_TAB),      XXXXXXX,             XXXXXXX,             XXXXXXX,             LT(KL_OPE, KC_COMM), LT(KL_FUN, KC_SPACE),XXXXXXX,             XXXXXXX,             XXXXXXX,             LALT_T(KC_GRV)
     ),
 
@@ -335,7 +335,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [KL_OPE] = LAYOUT(
         CKC_EXIT,            CKC_WA,              KC_MS_UP,            CKC_FU,              CKC_NYO,             CKC_NYU,             CKC_NU,              KC_UP,               CKC_RO,              LGUI_T(KC_LBRC),
         CKC_ZA,              KC_MS_LEFT,          KC_MS_DOWN,          KC_MS_RIGHT,         KC_BTN1,             KC_HOME,             KC_LEFT,             KC_DOWN,             KC_RIGHT,            KC_END,
-        LSFT_T(KC_APP),      KC_WH_U,             KC_WH_D,             KC_BTN3,             KC_BTN2,             TD(TD_BRACKET_L),    TD(TD_BRACKET_R),    TD(TD_QUOTE),        KC_INT3,             LCTL_T(KC_INT1),
+        LSFT_T(KC_APP),      KC_WH_U,             KC_WH_D,             KC_BTN3,             KC_BTN2,             TD(TD_BRACKET_L),    TD(TD_BRACKET_R),    KC_EQL,              KC_INT3,             LCTL_T(KC_INT1),
         LT(KL_SYMNUM, KC_TAB),XXXXXXX,            XXXXXXX,             XXXXXXX,             _______,             LSFT_T(KC_ENT),      XXXXXXX,             XXXXXXX,             XXXXXXX,             LALT_T(KC_QUOT)
     ),
 
