@@ -126,7 +126,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 enum {
     TD_BRACKET_L = 0,
     TD_BRACKET_R,
-    TD_QUOTE,
     TD_3_QUOTE,
 };
 
@@ -140,11 +139,6 @@ void BRACKET_DANCE_R(tap_dance_state_t *state, void *user_data) {
     else if(state->count == 2){SEND_STRING("\\");}
     else if(state->count == 3){SEND_STRING("|");}
 };
-void QUOTE_DANCE(tap_dance_state_t *state, void *user_data) {
-    if(state->count == 1){SEND_STRING("&");}
-    else if(state->count == 2){SEND_STRING("@");}
-    else if(state->count == 3){SEND_STRING("{");}
-};
 void THREE_QUOTE_DANCE(tap_dance_state_t *state, void *user_data) {
     if(state->count == 1){SEND_STRING("&&&");}
     else if(state->count == 2){SEND_STRING("@@@");}
@@ -154,7 +148,6 @@ void THREE_QUOTE_DANCE(tap_dance_state_t *state, void *user_data) {
 tap_dance_action_t tap_dance_actions[] = {
     [TD_BRACKET_L] = ACTION_TAP_DANCE_FN (BRACKET_DANCE_L),
     [TD_BRACKET_R] = ACTION_TAP_DANCE_FN (BRACKET_DANCE_R),
-    [TD_QUOTE]     = ACTION_TAP_DANCE_FN (QUOTE_DANCE),
     [TD_3_QUOTE]   = ACTION_TAP_DANCE_FN (THREE_QUOTE_DANCE),
 };
 /* tap dance end */
