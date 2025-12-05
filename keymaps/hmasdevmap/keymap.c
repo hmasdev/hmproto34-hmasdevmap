@@ -126,7 +126,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 enum {
     TD_BRACKET_L = 0,
     TD_BRACKET_R,
-    TD_QUOTE,
     TD_3_QUOTE,
 };
 
@@ -140,11 +139,6 @@ void BRACKET_DANCE_R(tap_dance_state_t *state, void *user_data) {
     else if(state->count == 2){SEND_STRING("\\");}
     else if(state->count == 3){SEND_STRING("|");}
 };
-void QUOTE_DANCE(tap_dance_state_t *state, void *user_data) {
-    if(state->count == 1){SEND_STRING("&");}
-    else if(state->count == 2){SEND_STRING("@");}
-    else if(state->count == 3){SEND_STRING("{");}
-};
 void THREE_QUOTE_DANCE(tap_dance_state_t *state, void *user_data) {
     if(state->count == 1){SEND_STRING("&&&");}
     else if(state->count == 2){SEND_STRING("@@@");}
@@ -154,7 +148,6 @@ void THREE_QUOTE_DANCE(tap_dance_state_t *state, void *user_data) {
 tap_dance_action_t tap_dance_actions[] = {
     [TD_BRACKET_L] = ACTION_TAP_DANCE_FN (BRACKET_DANCE_L),
     [TD_BRACKET_R] = ACTION_TAP_DANCE_FN (BRACKET_DANCE_R),
-    [TD_QUOTE]     = ACTION_TAP_DANCE_FN (QUOTE_DANCE),
     [TD_3_QUOTE]   = ACTION_TAP_DANCE_FN (THREE_QUOTE_DANCE),
 };
 /* tap dance end */
@@ -231,7 +224,7 @@ const uint16_t PROGMEM KC_F6_F7[] = {KC_F6, KC_F7, COMBO_END};
 const uint16_t PROGMEM KC_F7_F8[] = {KC_F7, KC_F8, COMBO_END};
 const uint16_t PROGMEM KC_F6_F7_F8[] = {KC_F6, KC_F7, KC_F8, COMBO_END};
 
-const uint16_t PROGMEM KC_TD_QUOTE_KC_INT3[] = {TD(TD_QUOTE), KC_INT3, COMBO_END};
+const uint16_t PROGMEM KC_EQL_KC_INT3[] = {KC_EQL, KC_INT3, COMBO_END};
 
 combo_t key_combos[] = {
     // python
@@ -257,6 +250,7 @@ combo_t key_combos[] = {
     COMBO(KC_HJ, KC_Y),  // qwerty
     COMBO(KC_TG, KC_B),  // mod norman
     COMBO(KC_FG, KC_T),  // qwerty
+    COMBO(KC_XC, KC_MINS),  // qwerty / mod norman
     COMBO(KC_HOME_LEFT, CKC_NNN),
 
     // for brackets and quotes
@@ -309,12 +303,21 @@ combo_t key_combos[] = {
     COMBO(KC_QWDF, DF(KL_QWERTY)),     // mod norman
 
     // combo for mouse
-    COMBO(KC_TD_QUOTE_KC_INT3, KC_BTN1),
+    COMBO(KC_EQL_KC_INT3, KC_BTN1),
 };
 /* combo end */
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    // mod norman
+    [KL_NORMAN] = LAYOUT(
+        LGUI_T(KC_Q),        KC_W,                KC_D,                KC_F,                KC_B,                KC_J,                KC_U,                KC_R,                KC_P,                LGUI_T(KC_SCLN),
+        KC_A,                KC_S,                KC_E,                KC_T,                KC_G,                KC_Y,                KC_N,                KC_I,                KC_O,                KC_L,
+        KC_Z,                KC_X,                KC_C,                KC_V,                KC_K,                KC_H,                KC_M,                KC_MINS,             CKC_NN,              LCTL_T(KC_SLSH),
+        LSFT_T(KC_TAB),      XXXXXXX,             XXXXXXX,             XXXXXXX,             LT(KL_OPE, KC_COMM), LT(KL_FUN, KC_SPACE),XXXXXXX,             XXXXXXX,             XXXXXXX,             LALT_T(KC_GRV)
+    ),
+
+
     // QWERTY
     [KL_QWERTY] = LAYOUT(
         LGUI_T(KC_Q),        KC_W,                KC_E,                KC_R,                KC_T,                KC_Y,                KC_U,                KC_I,                KC_O,                LGUI_T(KC_P),
@@ -323,19 +326,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LSFT_T(KC_TAB),      XXXXXXX,             XXXXXXX,             XXXXXXX,             LT(KL_OPE, KC_BSPC), LT(KL_FUN, KC_SPACE),XXXXXXX,             XXXXXXX,             XXXXXXX,             LALT_T(KC_GRV)
     ),
 
-    // mod norman
-    [KL_NORMAN] = LAYOUT(
-        LGUI_T(KC_Q),        KC_W,                KC_D,                KC_F,                KC_B,                KC_J,                KC_U,                KC_R,                KC_P,                LGUI_T(KC_SCLN),
-        KC_A,                KC_S,                KC_E,                KC_T,                KC_G,                KC_Y,                KC_N,                KC_I,                KC_O,                KC_L,
-        KC_Z,                KC_X,                KC_C,                KC_V,                KC_K,                KC_H,                KC_M,                KC_EQL,              CKC_NN,              LCTL_T(KC_SLSH),
-        LSFT_T(KC_TAB),      XXXXXXX,             XXXXXXX,             XXXXXXX,             LT(KL_OPE, KC_COMM), LT(KL_FUN, KC_SPACE),XXXXXXX,             XXXXXXX,             XXXXXXX,             LALT_T(KC_GRV)
-    ),
-
     // Ope
     [KL_OPE] = LAYOUT(
         CKC_EXIT,            CKC_WA,              KC_MS_UP,            CKC_FU,              CKC_NYO,             CKC_NYU,             CKC_NU,              KC_UP,               CKC_RO,              LGUI_T(KC_LBRC),
         CKC_ZA,              KC_MS_LEFT,          KC_MS_DOWN,          KC_MS_RIGHT,         KC_BTN1,             KC_HOME,             KC_LEFT,             KC_DOWN,             KC_RIGHT,            KC_END,
-        LSFT_T(KC_APP),      KC_WH_U,             KC_WH_D,             KC_BTN3,             KC_BTN2,             TD(TD_BRACKET_L),    TD(TD_BRACKET_R),    TD(TD_QUOTE),        KC_INT3,             LCTL_T(KC_INT1),
+        LSFT_T(KC_APP),      KC_WH_U,             KC_WH_D,             KC_BTN3,             KC_BTN2,             TD(TD_BRACKET_L),    TD(TD_BRACKET_R),    KC_EQL,              KC_INT3,             LCTL_T(KC_INT1),
         LT(KL_SYMNUM, KC_TAB),XXXXXXX,            XXXXXXX,             XXXXXXX,             _______,             LSFT_T(KC_ENT),      XXXXXXX,             XXXXXXX,             XXXXXXX,             LALT_T(KC_QUOT)
     ),
 
